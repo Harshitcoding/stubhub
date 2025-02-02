@@ -5,12 +5,15 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-) {
+interface Props {
+  params: {
+    id: string;
+  };
+}
+
+export async function GET(_: Request, { params }: Props) {
   try {
-    const userId = parseInt(context.params.id);
+    const userId = parseInt(params.id);
 
     if (isNaN(userId)) {
       return NextResponse.json(
