@@ -10,7 +10,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const userId  = parseInt(params.id);
+    const userId = parseInt(params.id);
 
     if (isNaN(userId)) {
       return NextResponse.json(
@@ -21,7 +21,7 @@ export async function GET(
 
     const post = await prisma.post.findUnique({
       where: {
-        id: userId ,
+        id: userId,
       },
     });
 
