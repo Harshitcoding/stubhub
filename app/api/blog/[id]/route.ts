@@ -5,13 +5,10 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-interface Props {
-  params: {
-    id: string;
-  };
-}
-
-export async function GET(_: Request, { params }: Props) {
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
     const userId = parseInt(params.id);
 
