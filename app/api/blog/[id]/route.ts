@@ -5,10 +5,12 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = parseInt(params.id);
+    // Await the params Promise to get the actual params object
+    const resolvedParams = await params;
+    const userId = parseInt(resolvedParams.id);
 
     if (isNaN(userId)) {
       return NextResponse.json({ message: 'Invalid post ID' }, { status: 400 });
