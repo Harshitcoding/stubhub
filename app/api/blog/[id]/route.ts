@@ -1,17 +1,15 @@
-// app/api/blog/[id]/route.ts
-
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+// The correct type signature for Next.js route handlers
 export async function GET(
-  req: NextRequest,
-  
-{ params } : { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
   try {
-    const userId = Number(params.id);
+    const userId = Number(context.params.id);
 
     if (isNaN(userId)) {
       return NextResponse.json(
