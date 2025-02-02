@@ -1,16 +1,15 @@
-// app/api/blog/[id]/route.ts
-
-import { NextRequest, NextResponse } from 'next/server';
+import {  NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+// Change the function signature to use Request instead of NextRequest
 export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  context: { params: { id: string } }
 ) {
   try {
-    const userId = parseInt(params.id);
+    const userId = parseInt(context.params.id);
 
     if (isNaN(userId)) {
       return NextResponse.json(
