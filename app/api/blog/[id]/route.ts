@@ -3,12 +3,15 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+interface RouteParams {
+  params: {
+    id: string;
+  };
+}
+
+export async function GET(request: Request, context: RouteParams) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     
     if (!id || isNaN(Number(id))) {
       return NextResponse.json({ message: "Invalid post ID" }, { status: 400 });
