@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 // Change the function signature to use Request instead of NextRequest
 export async function GET(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }>} }
 ) {
   try {
     const userId = parseInt(context.params.id);
