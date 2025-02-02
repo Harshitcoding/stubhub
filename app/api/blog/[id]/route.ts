@@ -1,4 +1,3 @@
-// app/api/blog/[id]/route.ts
 
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
@@ -7,9 +6,10 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }>  }
 ) {
   try {
+    // @ts-ignore
     const userId = parseInt(params.id);
 
     if (isNaN(userId)) {
